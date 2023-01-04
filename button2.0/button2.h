@@ -6,11 +6,13 @@ typedef enum
 {
     BUTTON_STATE_IDLE,
     BUTTON_STATE_RELEASE,
+    BUTTON_STATE_HOLD,
     BUTTON_STATE_PRESS,
     BUTTON_STATE_SHORT_CLICK,
     BUTTON_STATE_LONG_CLICK,
 }BUTTON_STATE_TYPE;
-#define BUTTON_LONGCLICK_TIMEOUT 1000
+#define BUTTON_LONGHOLD_TIMEOUT 500
+#define BUTTON_LONGCLICK_TIMEOUT 2000
 /**
  * @brief 获取按键状态函数指针 
  * @return TRUE 按键被触发 FALSE 按键被释放
@@ -22,6 +24,7 @@ typedef struct Button_T
     uint8_t ButtonId;                     //按键的ID信息
     uint8_t state;                        //按键当前状态
     uint32_t tick;                        //按键时间参数
+    uint32_t hold_tick;                   //长按保持时间参数
     func_GetButtonState func_ButtonState; //获取按键状态的函数成员
 } Button;
 /* 按键模块的事件回调函数指针 */
